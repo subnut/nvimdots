@@ -5,13 +5,15 @@ end
 
 local servers = {
   --[[ C ]]     "clangd",
-  --[[ Py ]]    "pylsp", "basedpyright",
   --[[ Zig ]]   "zls",
 
   --[[ D ]]     {"serve-d", "serve_d"},
   --[[ Lua ]]   {"lua-language-server", "lua_ls"},
   --[[ Rust ]]  {"rust-analyzer", "rust_analyzer"},
   --[[ Typst ]] {"typst-lsp", "typst_lsp"},
+
+  --[[ Python ]] "pylsp",
+  {"basedpyright-langserver", "basedpyright"}
 }
 
 local config = {}
@@ -22,7 +24,7 @@ T.config = function(_, __)
     local exe = type(server) == "string" and server or server[1]
     local lsp = type(server) == "string" and server or server[2]
     local cfg = config[lsp] or {}
-    if vim.fn.executable(exe) then
+    if vim.fn.executable(exe) > 0 then
       require'lspconfig'[lsp].setup(cfg)
     end
   end
