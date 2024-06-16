@@ -3,3 +3,4 @@ if vim.env.TERM ~= "wezterm" then
 end
 
 vim.o.termguicolors = true
+mycfg.italics = true

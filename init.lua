@@ -1,3 +1,4 @@
+mycfg = require'mycfg'
 require'my.config'
 
 require'my.helpers.ensure.venv'
