@@ -21,11 +21,10 @@ add'iceberg'{
   "cocopon/iceberg.vim",
   config = function(_, opts)
     if not mycfg.italics then return end
-    vim.api.nvim_create_augroup("MyIcebergCustomizations", {})
     vim.api.nvim_create_autocmd("ColorScheme", {
       pattern = "iceberg",
-      group = "MyIcebergCustomizations",
       desc = "My customizations for the iceberg colorscheme",
+      group = vim.api.nvim_create_augroup("mycolor_iceberg", {}),
       callback = function(_)
         vim.cmd.highlight("Comment gui=italic")
       end
@@ -41,11 +40,22 @@ add'gruvbox-material'{
   opts = {
     enable_bold = true,
     enable_italic = mycfg.italics,
+    background = vim.o.background == "dark"
+                  and "hard" or "medium"
   },
   config = function(_, opts)
     for k, v in pairs(opts) do
       vim.g["gruvbox_material_"..k] = v
     end
+    vim.api.nvim_create_autocmd("ColorSchemePre", {
+      pattern = "gruvbox-material",
+      desc = "My customizations for the gruvbox-material colorscheme",
+      group = vim.api.nvim_create_augroup("mycolor_gruvbox_material", {}),
+      callback = function()
+        vim.g.gruvbox_material_background =
+          vim.o.background == "dark" and "hard" or "medium"
+      end
+    })
   end,
 }
 

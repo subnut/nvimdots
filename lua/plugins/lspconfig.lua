@@ -4,16 +4,15 @@ if not mycfg.lsp then
 end
 
 local servers = {
-  --[[ C ]]     "clangd",
-  --[[ Zig ]]   "zls",
+  --[[ C ]]      "clangd",
+  --[[ Zig ]]    "zls",
+  --[[ Python ]] "pylsp",
 
   --[[ D ]]     {"serve-d", "serve_d"},
   --[[ Lua ]]   {"lua-language-server", "lua_ls"},
   --[[ Rust ]]  {"rust-analyzer", "rust_analyzer"},
   --[[ Typst ]] {"typst-lsp", "typst_lsp"},
 
-  --[[ Python ]] "pylsp",
-  {"basedpyright-langserver", "basedpyright"}
 }
 
 local config = {}
