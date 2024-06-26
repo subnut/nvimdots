@@ -1,8 +1,9 @@
 local idx = 1 --[[
 
-  1. iceberg
-  2. gruvbox.nvim
-  3. gruvbox-material
+  1. edge
+  2. iceberg
+  3. gruvbox.nvim
+  4. gruvbox-material
 
 ]]
 
@@ -17,6 +18,18 @@ function add(n)
 end
 
 
+add'edge'{
+  "sainnhe/edge",
+  opts = {
+    style = "aura",
+    enable_italic = true,
+  },
+  config = function(_, opts)
+    for k, v in pairs(opts) do
+      vim.g["edge_"..k] = v
+    end
+  end
+}
 add'iceberg'{
   "cocopon/iceberg.vim",
   config = function(_, opts)
