@@ -7,5 +7,5 @@ require'my.helpers.ensure.lazy'
 require'lazy'.setup {
   lockfile = vim.fn.stdpath("data") .. "/lazylock.json",
   install = { colorscheme = { "default" }},
-  import = "plugins",
+  spec = { import = "plugins" },
 }
