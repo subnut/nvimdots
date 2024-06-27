@@ -11,4 +11,12 @@ return {
   keys = {
     { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle NeoTree" },
   },
+  opts = {
+    window = {
+      mappings = {
+        ["<Tab>"] = "toggle_node",
+        ["<Space>"] = "noop", -- <leader>
+      },
+    },
+  },
 }
