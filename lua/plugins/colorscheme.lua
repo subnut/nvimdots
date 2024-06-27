@@ -78,6 +78,12 @@ add'gruvbox-material'{
 }
 
 
+vim.api.nvim_create_user_command(
+  "MyColorscheme",
+  function(tbl) vim.cmd.colorscheme(tbl.args) end,
+  { complete = function() return arr end, nargs = 1 })
+
+
 local main = tbl[idx] -- The main (startup) colorscheme
 main.priority = 1000
 main.lazy = false
