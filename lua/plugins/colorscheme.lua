@@ -14,6 +14,7 @@ local arr = {}
 function add(n)
   table.insert(arr, n)
   return function(x)
+    x.lazy = true
     table.insert(tbl, x)
   end
 end
