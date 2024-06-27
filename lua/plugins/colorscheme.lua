@@ -1,9 +1,10 @@
 local idx = 1 --[[
 
   1. edge
-  2. iceberg
-  3. gruvbox.nvim
-  4. gruvbox-material
+  2. melange
+  3. iceberg
+  4. gruvbox.nvim
+  5. gruvbox-material
 
 ]]
 
@@ -29,6 +30,9 @@ add'edge'{
       vim.g["edge_"..k] = v
     end
   end
+}
+add'melange'{
+  "savq/melange-nvim",
 }
 add'iceberg'{
   "cocopon/iceberg.vim",
