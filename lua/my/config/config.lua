@@ -8,9 +8,3 @@ vim.o.undofile = true
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
-
--- others
-vim.cmd.runtime {
-  "lua/my/configs/*.lua",
-  bang = true
-}
