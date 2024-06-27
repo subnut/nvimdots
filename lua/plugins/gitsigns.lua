@@ -1,9 +1,11 @@
 local T = {
   "lewis6991/gitsigns.nvim",
-  version = "*", config = {},
+  version = "*",
+  config = true,
+  opts = {},
 }
 
-T.config.on_attach = function(b)
+T.opts.on_attach = function(b)
   local map = setmetatable({}, {
     __index = function(_, m) return function(k, c, o)
       if o then o.buffer = b else o = {buffer = b} end
@@ -22,7 +24,6 @@ T.config.on_attach = function(b)
   local navopts = {
     target = "all",
     greedy = false,
-    wrap = false,
   }
   map.n(']g', cb(gs.nav_hunk, "next", navopts))
   map.n('[g', cb(gs.nav_hunk, "prev", navopts))
@@ -30,7 +31,7 @@ T.config.on_attach = function(b)
   map.n('[G', cb(gs.nav_hunk, "first", navopts))
 end
 
-T.config.current_line_blame_opts = {
+T.opts.current_line_blame_opts = {
   virt_text_pos = "right_align"
 }
 
