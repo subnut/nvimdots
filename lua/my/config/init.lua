@@ -8,3 +8,4 @@ local mod = setmetatable({}, {
 _ = mod.config
 _ = mod.keymaps
 _ = mod.terminals
+_ = mod.rescursor
