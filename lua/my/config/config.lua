@@ -5,6 +5,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.splitbelow = true
 vim.o.undofile = true
+vim.wo.wrap = false -- TODO: Set for new windows on WinNew autocmd
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
