@@ -1,10 +1,11 @@
-local idx = 1 --[[
+local idx = 6 --[[
 
   1. edge
   2. melange
   3. iceberg
   4. gruvbox.nvim
   5. gruvbox-material
+  6. catppuccin
 
 ]]
 
@@ -75,6 +76,22 @@ add'gruvbox-material'{
       end
     })
   end,
+}
+add'catppuccin'{
+  "catppuccin/nvim",
+  name = "catppuccin",
+  config = true,
+  opts = {
+    show_end_of_buffer = true,
+    integrations = {
+      mini = { enabled = false, },
+      neotree = true,
+      telescope = {
+        enabled = true,
+        style = "nvchad"
+      }
+    },
+  },
 }
 
 
