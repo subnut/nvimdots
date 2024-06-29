@@ -32,6 +32,14 @@ cfg.sections.lualine_b[2] = {
     return vim.b.gitsigns_status_dict
   end,
 }
+vim.api.nvim_create_autocmd("User", {
+  pattern = 'GitSignsUpdate',
+  callback = function()
+    require'lualine'.refresh{
+      scope = "window",
+    }
+  end,
+})
 
 cfg.sections.lualine_x = {
   { "encoding", cond = function()
