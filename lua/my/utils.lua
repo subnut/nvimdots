@@ -22,6 +22,10 @@ end
       .keymap.n["<leader>h"](..., ...)
       .keymap.n["<leader>h"] = { ..., ... }
 
+  EQUIVALENT:
+      .keymap.ni("hello", "bello")
+      .keymap.ni.hello = "bello"
+      .keymap.ni.hello("bello")
 --]]
 M.keymap = setmetatable({}, {
   __index = function(_, idx)
@@ -38,6 +42,7 @@ M.keymap = setmetatable({}, {
         end
       end,
       __newindex = function(_, idx, val)
+        val = type(val) == "table" and val or { val }
         vim.keymap.set(mode, idx, val[1], val[2])
       end
     })
