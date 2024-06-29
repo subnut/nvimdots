@@ -1,6 +1,13 @@
+local cfg = {}
 local T = {
   "nvim-telescope/telescope.nvim",
-  version = "*",
+  version = "*", opts = cfg,
+}
+
+cfg.defaults = {
+  mappings = {
+    n = { q = require'telescope.actions'.close, },
+  },
 }
 
 T.cmd = "Telescope"
