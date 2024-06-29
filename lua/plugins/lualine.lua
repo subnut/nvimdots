@@ -41,6 +41,23 @@ vim.api.nvim_create_autocmd("User", {
   end,
 })
 
+cfg.sections.lualine_c = {
+  { "filename", separator = "" },
+  { "filename",
+    path = 1,
+    padding = 0,
+    color = "StatusLineNC",
+    file_status = false,
+    cond = function()
+      return vim.fn.expand("%:t")
+          ~= vim.fn.expand("%")
+    end,
+    separator = {
+      left = "|",
+      right = "",
+    },
+  }
+}
 cfg.sections.lualine_x = {
   { "encoding", cond = function()
       return vim.bo.fileencoding ~= "utf-8"
@@ -57,6 +74,7 @@ cfg.sections.lualine_x = {
   },
 }
 
+
 -- inactive sections
 cfg.inactive_sections = {}
 for _,x in ipairs{"a", "b", "c", "x", "y", "x"} do
@@ -71,7 +89,14 @@ cfg.inactive_sections.lualine_a = {
     separator = "",
     padding = 0,
   },
-  { "filename", padding = 0 }
+  { "filename",
+    cond = function()
+      return vim.fn.expand("%:t")
+          ~= vim.fn.expand("%")
+    end,
+  },
+  { "filename", path = 1,
+    file_status = false, }
 }
 cfg.inactive_sections.lualine_z = {{ 'location', padding = 0 }}
 
