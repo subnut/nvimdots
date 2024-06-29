@@ -1,4 +1,4 @@
-local idx = 6 --[[
+local idx = 1 --[[
 
   1. edge
   2. melange
