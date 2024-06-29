@@ -31,8 +31,4 @@ T.opts.on_attach = function(b)
   map.n('[G', cb(gs.nav_hunk, "first", navopts))
 end
 
-T.opts.current_line_blame_opts = {
-  virt_text_pos = "right_align"
-}
-
 return T
