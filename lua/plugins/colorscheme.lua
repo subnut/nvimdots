@@ -84,12 +84,15 @@ add'catppuccin'{
   opts = {
     show_end_of_buffer = true,
     integrations = {
-      mini = { enabled = false, },
+      leap = true,
       neotree = true,
       telescope = {
         enabled = true,
         style = "nvchad"
-      }
+      },
+      mini = {
+        enabled = false
+      },
     },
   },
 }
