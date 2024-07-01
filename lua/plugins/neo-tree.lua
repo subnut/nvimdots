@@ -28,6 +28,8 @@ cfg.window = {
     ["<Space>"] = "noop", -- :h mapleader
   },
 }
+cfg.window.mappings.s = "open_split"
+cfg.window.mappings.S = "open_vsplit"
 
 cfg.filesystem = {
   cwd_target = {

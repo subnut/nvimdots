@@ -13,14 +13,15 @@ cfg.options = {
     left = "|", right = "|"
   },
   disabled_filetypes = {
-    'neo-tree',
-    'undotree',
+    "neo-tree",
+    "undotree",
+    "query",  -- treesitter :InspectTree
   },
   ignore_focus = {
-    'undotree',
-    'neo-tree',
-    'neo-tree-popup',
-    'TelescopePrompt',
+    "undotree",
+    "neo-tree",
+    "neo-tree-popup",
+    "TelescopePrompt",
   }
 }
 
