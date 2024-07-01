@@ -31,4 +31,13 @@ T.opts.on_attach = function(b)
   map.n('[G', cb(gs.nav_hunk, "first", navopts))
 end
 
+if require'mycfg'.vim then
+  T.opts.signs = {}
+  T.opts.signs.add = { text = "+" }
+  T.opts.signs.change = { text = "~" }
+  T.opts.signs.delete = { text = "-" }
+  T.opts.signs.topdelete = { text = "-" }
+  T.opts.signs.changedelete = { text = "~" }
+end
+
 return T

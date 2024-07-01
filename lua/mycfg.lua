@@ -1,9 +1,8 @@
 local T = {}
-for _,key in ipairs({
-  "lsp",
-  "treesitter",
-  "italics",
-}) do T[key] = false end
 
 T.lsp = true
+T.italics = false
+T.treesitter = false
+T.vim = vim.v.progname == "vim"
+
 return T

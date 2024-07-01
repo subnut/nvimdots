@@ -1,3 +1,7 @@
+if require'mycfg'.vim then
+  return {}
+end
+
 local cfg = {}
 local T = {
     "nvim-lualine/lualine.nvim",

@@ -5,3 +5,7 @@ if not ok and do_warn then vim.notify(...
     .. [[: no configuration found for $TERM = "]]
     .. vim.env.TERM .. '"', vim.log.levels.WARN)
 end
+
+if require'mycfg'.vim then
+  vim.o.termguicolors = false
+end

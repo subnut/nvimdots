@@ -117,4 +117,17 @@ main.init = main.init
     vim.cmd.colorscheme(arr[idx])
   end
 
-return tbl
+if not require'mycfg'.vim then
+  return tbl
+else
+  vim.cmd.colorscheme "vim"
+  vim.cmd.highlight "SignColumn ctermbg=NONE guibg=NONE"
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "vim",
+    desc = "Remove background from SignColumn",
+    callback = function() vim.cmd.highlight
+      "SignColumn ctermbg=NONE guibg=NONE"
+    end
+  })
+  return {}
+end
