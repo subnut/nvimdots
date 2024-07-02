@@ -10,3 +10,4 @@ _ = mod.keymaps
 _ = mod.terminals
 _ = mod.rescursor
 _ = mod.background
+_ = mod.bg_dbus_mon
