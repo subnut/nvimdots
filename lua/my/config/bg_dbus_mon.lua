@@ -1,16 +1,14 @@
-if vim.fn.executable("dbus-monitor") ~= 1
-  then return {}  -- we need dbus-monitor
+local cmd = "dbus-monitor"
+if vim.fn.executable(cmd) ~= 1 then
+  return  -- we need dbus-monitor
 end
 
-local self = ...
-local M = {
-  sched= "",
-}
+local M = {}
+local opts = {}
+local uv = vim.uv
 
-local cmd = {
-  "dbus-monitor",
-  "--binary",
-  vim.iter{
+opts.args = {
+  "--binary", vim.iter{
     "type=signal",
     "path=/org/freedesktop/portal/desktop",
     "interface=org.freedesktop.portal.Settings",
@@ -20,50 +18,61 @@ local cmd = {
   }:join(","),
 }
 
+local stdout = uv.new_pipe()
+local stderr = uv.new_pipe()
+opts.stdio = { nil, stdout, stderr }
 
--- Checks if a bg change is already scheduled
--- if not, then registers a scheduler for the same
-local do_schedule_bg = function(bg)
-  if require(self).sched == bg
-    then return  -- already scheduled
-  end
-  require(self).sched = bg
-  vim.schedule(function()
-    vim.o.background = bg
-    require(self).sched = nil
-  end)
+local onexit = function(code, signal)
+  local str = "[EXIT] dbus-monitor exited (exit code: %d)"
+  local cb = require'my.utils'.callback
+  vim.schedule(cb(
+    vim.notify,
+    str:format(code),
+    vim.log.levels.INFO))
 end
 
+opts.env = {}
+local env = uv.os_environ()
+for key,val in pairs(env) do
+  if key:sub(1, 5) == "DBUS_" then
+    table.insert(opts.env, key.."="..val)
+  end
+end
 
-local opts = { text = false }
-function opts.stdout (err, data)
+local stdout_handler = function (err, data)
   assert(not err, err)
+  if data == nil then
+    return  -- EOF
+  end
   local sig = "\x01u\x00"
   local idx = data:reverse()
                   :find(sig:reverse())
-
   if idx == nil then
-    -- Wrong message.
-    return
+    return  -- Wrong message.
   end
-
+  local bgcb = function(bg) return
+    function() vim.o.bg = bg end
+  end
   local data = data:sub(-idx)
   if data:match("\x01") == nil  -- ie. color-scheme != 1
-    then do_schedule_bg("light")
-    else do_schedule_bg("dark")
+    then vim.schedule(bgcb("light"))
+    else vim.schedule(bgcb("dark"))
   end
 end
-function opts.stderr (err, data)
+
+M.handle, M.pid = uv.spawn(
+  cmd, opts, onexit
+)
+
+stdout:read_start(stdout_handler)
+stderr:read_start(function(err, data)
   assert(not err, err)
   local str = "[STDERR] dbus-monitor: %s"
-  vim.notify(str:format(data), vim.log.levels.INFO)
-end
-
-
-vim.system(cmd, opts,
-  function(obj)
-    local str = "[EXIT] dbus-monitor exited (exit code: %d)"
-    vim.notify(str:format(obj.code), vim.log.levels.INFO)
-  end)
+  local cb = require'my.utils'.callback
+  vim.schedule(cb(
+    vim.notify,
+    str:format(data),
+    vim.log.levels.INFO))
+end)
 
 return M
