@@ -19,4 +19,5 @@ lcs.tab = "→ "
 -- lcs.tab = ">…"
 lcs.extends = "»"
 lcs.precedes = "«"
+lcs.multispace = lcs.lead
 vim.opt.lcs = lcs
