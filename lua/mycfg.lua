@@ -1,8 +1,9 @@
-local T = {}
-
-T.lsp = true
-T.italics = false
-T.treesitter = false
-T.vim = vim.v.progname == "vim"
+local T = {
+  cmp = true,
+  lsp = true,
+  italics = false,
+  treesitter = false,
+  vim = vim.v.progname == "vim"
+}
 
 return T
