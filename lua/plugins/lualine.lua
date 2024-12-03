@@ -47,15 +47,18 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 cfg.sections.lualine_c = {
-  { "filename", separator = "" },
+  { "filename",
+    separator = "",
+    newfile_status = true,
+  },
   { "filename",
     path = 1,
     padding = 0,
     color = "StatusLineNC",
     file_status = false,
     cond = function()
-      return vim.fn.expand("%:t")
-          ~= vim.fn.expand("%")
+      return vim.fn.expand("%:.")
+          ~= vim.fn.expand("%:t")
     end,
     separator = {
       left = "|",
