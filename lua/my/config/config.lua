@@ -1,6 +1,7 @@
 -- defaults
 vim.o.cmdheight = 1
 
+vim.o.title = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.splitbelow = true
